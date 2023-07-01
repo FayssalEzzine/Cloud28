@@ -1,34 +1,66 @@
-import React from 'react';
-import './CourseContent.css';
+import React, { useState } from 'react';
+import './InstanceProgress.css';
 
-function CourseContent() {
-  const percent = 50;
 
-  const CircularProgress = ({ progress }) => {
-    const circumference = 50 * 2 * Math.PI;
-    const offset = circumference - (progress / 100) * circumference;
 
-    return (
-      <div className="circular-progress">
-        <svg className="circle" aria-hidden="true">
-          <circle className="circle-background" r="50" cx="60" cy="60" />
-          <circle
-            className="circle-progress"
-            r="50"
-            cx="60"
-            cy="60"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-          />
-        </svg>
-        <span className="progress-text">{progress}%</span>
-      </div>
-    );
-  };
+
+
+
+const ProgressBar = ({ activeStep }) => {
+  const steps = [1, 2, 3, 4, 5, 6];
 
   return (
     <React.Fragment>
-      <title>courseContent</title>
+      <div className="progress-bar1">
+        {steps.map((step) => (
+          <div
+            key={step}
+            className={`circle1 ${step <= activeStep ? 'active' : ''}`}
+          ></div>
+        ))}
+        <div className="line1"></div>
+      </div>
+    </React.Fragment>
+  );
+};
+
+const InstanceProgress = () => {
+  const [isEnlarged, setIsEnlarged] = useState(false);
+
+  const toggleImageSize = () => {
+    setIsEnlarged(!isEnlarged);
+  };
+  return (
+    <React.Fragment>
+      <div className="image-viewer">
+        <img
+          className={isEnlarged ? 'enlarged' : ''}
+          src="assets/linux terminal.jpg" // Remplacez par le chemin réel vers votre image
+          alt=""
+        />
+        <div className="button-container">
+          <button onClick={toggleImageSize}>
+            {isEnlarged ? 'Minimize' : 'Enlarge'}
+          </button>
+        </div>
+      </div>
+
+      <div className="video-container1">
+        <iframe
+          
+          
+          src="https://www.youtube.com/embed/BNL3qBN9pP0"
+          title="YouTube Video"
+          width="420px"
+          height="220px"
+          frameBorder="0"
+          allowFullScreen
+        ></iframe>
+      </div>
+
+      <ProgressBar activeStep={3} />
+
+      <title>InstanceProgress</title>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link
@@ -63,7 +95,11 @@ function CourseContent() {
           <div className="bg-white w-16 h-screen flex flex-col items-center justify-between">
             {/* Logo */}
             <div className="my-4">
-              <img src="assets/icon.png" alt="CRMEFCLOUD" className="w-53 h-38" />
+              <img
+                src="assets/icon.png"
+                alt="CRMEFCLOUD"
+                className="w-53 h-38"
+              />
             </div>
             {/* Ligne de séparation */}
             <div className="border border-gray-300 w-16 absolute top-40"></div>
@@ -86,20 +122,63 @@ function CourseContent() {
 
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.7.3/dist/alpine.min.js" defer></script>
 
-        <CircularProgress progress={percent} />
-
-        <p className="course-pro">Course progress</p>
       </div>
 
-      <p className="LLC">Learn Linux commands and practice as you progress</p>
+      <button
+        className="go-next-button"
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: '8px 22px',
+          gap: '10px',
+          position: 'absolute',
+          left: '79.51%',
+          right: '8.17%',
+          top: '900px',
+          bottom: '11.72%',
+          background: '#1700CF',
+          borderRadius: '5px',
+          width: '193px',
+          height: '29px',
+          fontFamily: 'Inter',
+          fontStyle: 'normal',
+          fontWeight: 500,
+          fontSize: '24px',
+          lineHeight: '29px',
+          textAlign: 'center',
+          letterSpacing: '0.46px',
+          color: '#FFFFFF',
+        }}
+      >
+        Go next
+      </button>
 
-      <p className="LLC1">
-        This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3
-      </p>
 
-      <img src="assets/linux.png" alt="linux" className="ana" />
 
-      <div className="faq-container">
+
+      <p style={{
+      position: 'absolute',
+      width: '744px',
+      height: '47px',
+      left: '233px',
+      top: '520px',
+      fontFamily: 'Inter',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '26px',
+      lineHeight: '20px',
+      color: '#000000',
+    }}>
+      Practice in the linux instance
+    </p>
+
+      <div className="container">
+     
+      <p className="video-title">Video : Navigating the file system</p>
+      </div>
+
+      <div className="faq-container1">
         <div className="faq-item">
           <div className="faq-question">
             <span className="faq-arrow">▼</span> Welcome to the course
@@ -160,6 +239,7 @@ function CourseContent() {
           </div>
         </div>
 
+
         <div className="faq-item">
           <div className="faq-question">
             <span className="faq-arrow">▼</span> Mastering open source software
@@ -180,6 +260,7 @@ function CourseContent() {
           </div>
         </div>
 
+
         <div className="faq-item">
           <div className="faq-question">
             <span className="faq-arrow">▼</span> Course conclusion
@@ -199,22 +280,9 @@ function CourseContent() {
             </p>
           </div>
         </div>
-
-      
-      </div>
-      <div>
-        <ul className="liste list-disc pl-8">
-              What you'll learn
-          <li>Quickly Learn the Linux Command Line <br />from Scratch!</li>
-          <li>Use Bash Scripts and Cron Scheduling <br />Software to Automate Boring Tasks!</li>
-          <li>Become an Independent User of the Linux <br />Operating System!</li>
-          <li>Learn how to Search for, Customise, Install<br /> and Manage Open Source Software with <br />Package Managers!</li>
-          <li>Operate a Linux Computer Entirely from the <br />Command Line!</li>
-          <li>Gain a Complete Understanding of Linux & fill <br />in any existing knowledge gaps!</li>
-        </ul>
       </div>
     </React.Fragment>
   );
-}
+};
 
-export default CourseContent;
+export default InstanceProgress;

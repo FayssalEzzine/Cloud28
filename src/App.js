@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import CourseContent from './CourseContent';
 import JoinClass from './join_class';
+import InstanceProgress from './InstanceProgress'; // Import de l'interface InstanceProgress
 
 const App = () => {
-  const [showCourseContent, setShowCourseContent] = useState(true);
+  const [interfaces, setInterfaces] = useState(['CourseContent']); // Tableau initial contenant l'interface CourseContent
 
-  const toggleInterface = () => {
-    setShowCourseContent(!showCourseContent);
+  const toggleInterface = (interfaceName) => {
+    if (interfaces.includes(interfaceName)) {
+      setInterfaces(interfaces.filter((name) => name !== interfaceName));
+    } else {
+      setInterfaces([...interfaces, interfaceName]);
+    }
   };
 
   return (
     <div>
-      <button onClick={toggleInterface}>Toggle Interface</button>
+      <button onClick={() => toggleInterface('CourseContent')}>Toggle Course Content</button>
+      <button onClick={() => toggleInterface('JoinClass')}>Toggle Join Class</button>
+      <button onClick={() => toggleInterface('InstanceProgress')}>Toggle Instance Progress</button>
 
-      {showCourseContent ? <CourseContent /> : <JoinClass />}
+      {interfaces.includes('CourseContent') && <CourseContent />} {/* Affiche CourseContent si présent dans le tableau interfaces */}
+      {interfaces.includes('JoinClass') && <JoinClass />} {/* Affiche JoinClass si présent dans le tableau interfaces */}
+      {interfaces.includes('InstanceProgress') && <InstanceProgress />} {/* Affiche InstanceProgress si présent dans le tableau interfaces */}
     </div>
   );
 };
